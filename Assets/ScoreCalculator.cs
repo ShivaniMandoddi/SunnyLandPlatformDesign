@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScoreCalculator : MonoBehaviour
 {
     // Start is called before the first frame update
-    int score;
+    public int score;
     public void Score(int scoreValue)
     {
         score = score + scoreValue;

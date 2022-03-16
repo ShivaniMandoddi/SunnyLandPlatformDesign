@@ -8,13 +8,16 @@ public class PlayerAnotherMovement : MonoBehaviour
     public float jumpSpeed;
     Rigidbody2D rb;
     Vector2 movement;
+    SpriteRenderer render;
     Animator animator;
     bool IsGrounded = true;
+    ScoreCalculator calculator;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        render = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,10 @@ public class PlayerAnotherMovement : MonoBehaviour
         {
             Jump();
         }
+        if (movement.x < 0)
+            render.flipX = true;
+        else if (movement.x > 0)
+            render.flipX = false;
 
     }
     private void FixedUpdate()
@@ -49,6 +56,12 @@ public class PlayerAnotherMovement : MonoBehaviour
         {
             animator.SetBool("IsJump", false);
             IsGrounded = true;
+        }
+        if(collision.gameObject.tag=="Coins")
+        {
+            Destroy(collision.gameObject);
+            calculator = GameObject.Find("ScoreManager").GetComponent<ScoreCalculator>();
+            calculator.Score(5);
         }
     }
 }

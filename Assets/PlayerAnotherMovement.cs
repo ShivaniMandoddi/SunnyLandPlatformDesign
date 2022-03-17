@@ -98,7 +98,7 @@ public class PlayerAnotherMovement : MonoBehaviour
             expo.SetBool("IsDead", true);
             calculator.Score(10);
             Score.text = "Score: " + calculator.score;
-            IsJump = false;
+           
             StartCoroutine("Dead");
 
         }
@@ -116,6 +116,7 @@ public class PlayerAnotherMovement : MonoBehaviour
     {
         yield return (new WaitForSeconds(1)); 
         Destroy(collide);
+        IsJump = false;
     }
     private void Restart()// Restart Same PAge 
     {
